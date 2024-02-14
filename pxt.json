@@ -4,8 +4,8 @@
     "dependencies": {
         "core": "*",
         "microphone": "*",
-        "MakerBit-IR-Receiver": "github:pythom1234/pxt-makerbit-ir-receiver#3df90a6f87ebfbdd4d2778a698674cbca004794e",
-        "MakerBit-IR-Transmitter": "github:pythom1234/pxt-makerbit-ir-transmitter#e4ab238b51f0c1c24e904aa349fd62644574b2a8"
+        "MakerBit-IR-Transmitter": "github:pythom1234/pxt-makerbit-ir-transmitter#e4ab238b51f0c1c24e904aa349fd62644574b2a8",
+        "MakerBit-IR-Receiver": "github:Pythom1234/pxt-makerbit-ir-receiver#0202ccaf715d9a7f0cd921e547994edfe51a3e3f"
     },
     "files": [
         "main.ts",
