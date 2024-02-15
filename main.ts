@@ -52,6 +52,7 @@ namespace IRTransmitter {
 
         transmitBit(NEC_HDR_MARK, NEC_HDR_SPACE)
 
+        const a = control.micros()
         sections.forEach((section) => {
             let mask = 1 << 15;
             while (mask > 0) {
@@ -63,7 +64,6 @@ namespace IRTransmitter {
                 mask >>= 1
             }
         })
-        const a = control.micros()
         transmitBit(NEC_BIT_MARK, 100)
         const b = control.micros()
         console.log(b-a)
