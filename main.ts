@@ -69,7 +69,6 @@ namespace IRTransmitter {
                 mask >>= 1
             }
         })
-        transmitBit(NEC_BIT_MARK, 0)
         basic.showLeds(`
         . . . . .
         . . . . .
@@ -77,5 +76,6 @@ namespace IRTransmitter {
         . . . . .
         . . . . .
         `)
+        transmitBit(NEC_BIT_MARK, 0)
     }
 }
