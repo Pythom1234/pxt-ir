@@ -26,7 +26,6 @@ namespace IRTransmitter {
         const end = input.runningTimeMicros()
         waitCorrection = Math.idiv(end - start - runs * 2, runs * 2)
         control.waitMicros(2000)
-        console.log(waitCorrection)
     }
     function transmitBit(highMicros: number, lowMicros: number): void {
         pins.analogWritePin(irPin, 511);
