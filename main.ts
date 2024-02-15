@@ -34,7 +34,8 @@ namespace IRTransmitter {
         pins.analogWritePin(irPin, 1);
         control.waitMicros(lowMicros);
     }
-    //% block
+    //% block="send IR datagram $hex32bit"
+    //% block.loc.cs="poslat IR datagram $hex32bit"
     export function sendNec(hex32bit: string): void {
         if (hex32bit.length != 10) {
             return
@@ -63,6 +64,6 @@ namespace IRTransmitter {
                 mask >>= 1
             }
         })
-        transmitBit(NEC_BIT_MARK, 10)
+        transmitBit(NEC_BIT_MARK, 100)
     }
 }
