@@ -63,6 +63,6 @@ namespace IRTransmitter {
                 mask >>= 1
             }
         })
-        transmitBit(NEC_BIT_MARK, 1000)
+        transmitBit(NEC_BIT_MARK, 0)
     }
 }
