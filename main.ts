@@ -62,6 +62,7 @@ namespace IRTransmitter {
                 mask >>= 1
             }
         })
-        transmitBit(NEC_BIT_MARK, 0);
+        transmitBit(NEC_BIT_MARK, 0)
+        console.log("end")
     }
 }
