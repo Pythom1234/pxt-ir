@@ -36,7 +36,6 @@ namespace IRTransmitter {
     //% block="send IR datagram $hex32bit"
     //% block.loc.cs="poslat IR datagram $hex32bit"
     export function sendNec(hex32bit: string): void {
-        const a = control.micros()
         if (hex32bit.length != 10) {
             return
         }
@@ -64,6 +63,7 @@ namespace IRTransmitter {
                 mask >>= 1
             }
         })
+        const a = control.micros()
         transmitBit(NEC_BIT_MARK, 100)
         const b = control.micros()
         console.log(b-a)
