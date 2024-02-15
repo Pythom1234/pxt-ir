@@ -50,6 +50,13 @@ namespace IRTransmitter {
         const sections = [addressSection, commandSection]
 
         transmitBit(NEC_HDR_MARK, NEC_HDR_SPACE)
+        basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . # . .
+        . . . . .
+        . . . . .
+        `)
 
         sections.forEach((section) => {
             let mask = 1 << 15;
@@ -63,6 +70,12 @@ namespace IRTransmitter {
             }
         })
         transmitBit(NEC_BIT_MARK, 0)
-        console.log("end")
+        basic.showLeds(`
+        . . . . .
+        . . . . .
+        . # # # .
+        . . . . .
+        . . . . .
+        `)
     }
 }
