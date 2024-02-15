@@ -16,6 +16,8 @@ namespace IRTransmitter {
     //% block.loc.cs="připojit IR vysílač na pin %pin"
     export function connectTransmitter(pin: AnalogPin): void {
         irPin = pin
+        pins.analogWritePin(irPin, 0);
+        pins.analogSetPeriod(irPin, 26);
         const start = input.runningTimeMicros()
         const runs = 32;
         for (let i = 0; i < runs; i++) {
