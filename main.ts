@@ -10,39 +10,55 @@ namespace IRReciever {
 }
 //% icon="\uf09e" color=#014598 block="IR Transmitter" block.loc.cs="IR Vysílač"
 namespace IRTransmitter {
-    let irPin: DigitalPin
+    let irPin: AnalogPin
+    let waitCorrection: number
     //% block="connect IR transmitter at pin %pin"
     //% block.loc.cs="připojit IR vysílač na pin %pin"
-    export function connectTransmitter(pin: DigitalPin): void {
+    export function connectTransmitter(pin: AnalogPin): void {
         irPin = pin
-    }
-    //% block
-    export function sendDatagram(address: number, command: number): void {
-        if (irPin) {
-            pins.digitalWritePin(irPin, 0)
-            basic.pause(9)
-            pins.digitalWritePin(irPin, 1)
-            basic.pause(4.5)
-            pins.digitalWritePin(irPin, 0)
-
-            for (let i = 0; i < 16; i++) {
-                pins.digitalWritePin(irPin, (address >> i) & 1)
-                basic.pause(2.25)
-            }
-
-            for (let i = 0; i < 16; i++) {
-                pins.digitalWritePin(irPin, (~address >> i) & 1)
-                basic.pause(2.25)
-            }
-
-            for (let i = 0; i < 16; i++) {
-                pins.digitalWritePin(irPin, (command >> i) & 1)
-                basic.pause(2.25)
-            }
-
-            pins.digitalWritePin(irPin, 1)
+        const start = input.runningTimeMicros()
+        const runs = 32;
+        for (let i = 0; i < runs; i++) {
+            transmitBit(1, 1)
         }
+        const end = input.runningTimeMicros()
+        waitCorrection = Math.idiv(end - start - runs * 2, runs * 2)
+        control.waitMicros(2000)
     }
+    function transmitBit(highMicros: number, lowMicros: number): void {
+        pins.analogWritePin(irPin, 511);
+        control.waitMicros(highMicros);
+        pins.analogWritePin(irPin, 1);
+        control.waitMicros(lowMicros);
+    }
+    export function sendNec(hex32bit: string): void {
+        if (hex32bit.length != 10) {
+            return
+        }
 
+        const NEC_HDR_MARK = 9000 - waitCorrection
+        const NEC_HDR_SPACE = 4500 - waitCorrection
+        const NEC_BIT_MARK = 560 - waitCorrection + 50
+        const NEC_HIGH_SPACE = 1690 - waitCorrection - 50
+        const NEC_LOW_SPACE = 560 - waitCorrection - 50
 
+        const addressSection = parseInt(hex32bit.substr(0, 6))
+        const commandSection = parseInt("0x" + hex32bit.substr(6, 4))
+        const sections = [addressSection, commandSection]
+
+        transmitBit(NEC_HDR_MARK, NEC_HDR_SPACE)
+
+        sections.forEach((section) => {
+            let mask = 1 << 15;
+            while (mask > 0) {
+                if (section & mask) {
+                    transmitBit(NEC_BIT_MARK, NEC_HIGH_SPACE)
+                } else {
+                    transmitBit(NEC_BIT_MARK, NEC_LOW_SPACE)
+                }
+                mask >>= 1
+            }
+        })
+        transmitBit(NEC_BIT_MARK, 0);
+    }
 }
