@@ -31,6 +31,7 @@ namespace IRTransmitter {
         pins.analogWritePin(irPin, 1);
         control.waitMicros(lowMicros);
     }
+    //% block
     export function sendNec(hex32bit: string): void {
         if (hex32bit.length != 10) {
             return
