@@ -12,9 +12,14 @@ namespace IRReciever {
 namespace IRTransmitter {
     let irPin: AnalogPin
     let waitCorrection: number
-    //% block="connect IR transmitter at pin %pin"
-    //% block.loc.cs="připojit IR vysílač na pin %pin"
-    export function connectTransmitter(pin: AnalogPin): void {
+    let strengh = 511
+    //% block="connect IR transmitter at pin %pin||signal strengh $signalStrengh"
+    //% block.loc.cs="připojit IR vysílač na pin %pin||síla signálu $signalStrengh"
+    //% expandableArgumentMode=true
+    export function connectTransmitter(pin: AnalogPin, signalStrengh?: number): void {
+        if (signalStrengh) {
+            strengh = signalStrengh
+        }
         irPin = pin
         pins.analogWritePin(irPin, 0)
         pins.analogSetPeriod(irPin, 26)
@@ -28,7 +33,7 @@ namespace IRTransmitter {
         control.waitMicros(2000)
     }
     function transmitBit(highMicros: number, lowMicros: number): void {
-        pins.analogWritePin(irPin, 600)
+        pins.analogWritePin(irPin, strengh)
         control.waitMicros(highMicros)
         pins.analogWritePin(irPin, 1)
         control.waitMicros(lowMicros)
@@ -37,6 +42,9 @@ namespace IRTransmitter {
     //% block.loc.cs="poslat IR datagram $hex32bit"
     export function sendNec(hex32bit: string): void {
         if (hex32bit.length != 10) {
+            return
+        }
+        if (!irPin) {
             return
         }
 
@@ -63,7 +71,7 @@ namespace IRTransmitter {
                 mask >>= 1
             }
         })
-        
+
         transmitBit(BIT_MARK, 100)
     }
 }
