@@ -261,6 +261,38 @@ namespace irLegoPowerfunctions {
         }
     }
 
+    //% block="set light intensity %light to %intensity"
+    //% block.loc.cs="nastavit intenzitu světla %light na %intensity"
+    //% intensity.min=-7 intensity.max=7
+    //% weight=95
+    //% light.fieldEditor="gridpicker" light.fieldOptions.columns=4 light.fieldOptions.tooltips="false"
+    export function setLight(light: PowerFunctionsMotor, intensity: number) {
+        intensity = Math.max(-7, Math.min(7, intensity));
+        if (state) {
+            sendSingleOutputCommand(
+                getChannel(light),
+                getOutput(light),
+                intensity * state.motorDirections[light]
+            );
+        }
+    }
+
+    //% block="set servo %servo to %angle"
+    //% block.loc.cs="nastavit servu %servo natočení %angle"
+    //% angle.min=-7 angle.max=7
+    //% weight=99
+    //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=4 servo.fieldOptions.tooltips="false"
+    export function setServo(servo: PowerFunctionsMotor, angle: number) {
+        angle = Math.max(-7, Math.min(7, angle));
+        if (state) {
+            sendSingleOutputCommand(
+                getChannel(servo),
+                getOutput(servo),
+                angle * state.motorDirections[servo]
+            );
+        }
+    }
+
     namespace message {
         function mapValueToPwmElseFloat(value: number): number {
             switch (value) {
