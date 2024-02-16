@@ -17,6 +17,7 @@ namespace IRTransmitter {
     //% block.loc.cs="připojit IR vysílač na pin %pin||síla signálu $signalStrengh"
     //% signalStrengh.defl=511
     //% expandableArgumentMode=true
+    //% weight=100
     export function connectTransmitter(pin: AnalogPin, signalStrengh?: number): void {
         if (signalStrengh) {
             strengh = signalStrengh
@@ -41,6 +42,7 @@ namespace IRTransmitter {
     }
     //% block="send IR datagram $hex32bit"
     //% block.loc.cs="poslat IR datagram $hex32bit"
+    //% weight=99
     export function sendNec(hex32bit: string): void {
         if (hex32bit.length != 10) {
             return
