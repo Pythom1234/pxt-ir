@@ -280,7 +280,7 @@ namespace irLegoPowerfunctions {
     //% block="set servo %servo to %angle"
     //% block.loc.cs="nastavit servu %servo natočení %angle"
     //% angle.min=-7 angle.max=7
-    //% weight=99
+    //% weight=94
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=4 servo.fieldOptions.tooltips="false"
     export function setServo(servo: PowerFunctionsMotor, angle: number) {
         angle = Math.max(-7, Math.min(7, angle));
