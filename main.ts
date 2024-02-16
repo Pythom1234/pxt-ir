@@ -83,7 +83,7 @@ namespace IRTransmitter {
 
 //% icon="\uf09e" color=#014598  block="LEGO Powerfunctions"
 namespace irLegoPowerfunctions {
-    enum PowerFunctionsChannel {
+    export enum PowerFunctionsChannel {
         //% block="1"
         One = 0,
         //% block="2"
@@ -93,19 +93,19 @@ namespace irLegoPowerfunctions {
         //% block="4"
         Four = 3,
     }
-    enum PowerFunctionsDirection {
+    export enum PowerFunctionsDirection {
         //% block="left"
         Left = 1,
         //% block="right"
         Right = -1,
     }
-    enum PowerFunctionsOutput {
+    export enum PowerFunctionsOutput {
         //% block="red"
         Red = 0,
         //% block="blue"
         Blue = 1,
     }
-    enum PowerFunctionsMotor {
+    export enum PowerFunctionsMotor {
         //% block="red | channel 1"
         Red1 = 0,
         //% block="red | channel 2"
@@ -123,7 +123,7 @@ namespace irLegoPowerfunctions {
         //% block="blue | channel 4"
         Blue4 = 7,
     }
-    enum PowerFunctionsCommand {
+    export enum PowerFunctionsCommand {
         //% block="float"
         Float = 0,
         //% block="forward"
