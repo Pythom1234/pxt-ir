@@ -40,29 +40,29 @@ namespace IRTransmitter {
             return
         }
 
-        const NEC_HDR_MARK = 9000 - waitCorrection
-        const NEC_HDR_SPACE = 4500 - waitCorrection
-        const NEC_BIT_MARK = 560 - waitCorrection + 50
-        const NEC_HIGH_SPACE = 1690 - waitCorrection - 50
-        const NEC_LOW_SPACE = 560 - waitCorrection - 50
+        const IR_MARK = 9000 - waitCorrection
+        const SPACE = 4500 - waitCorrection
+        const BIT_MARK = 560 - waitCorrection + 50
+        const HIGH_SPACE = 1690 - waitCorrection - 50
+        const LOW_SPACE = 560 - waitCorrection - 50
 
         const addressSection = parseInt(hex32bit.substr(0, 6))
         const commandSection = parseInt("0x" + hex32bit.substr(6, 4))
         const sections = [addressSection, commandSection]
 
-        transmitBit(NEC_HDR_MARK, NEC_HDR_SPACE)
+        transmitBit(IR_MARK, SPACE)
 
         sections.forEach((section) => {
             let mask = 1 << 15;
             while (mask > 0) {
                 if (section & mask) {
-                    transmitBit(NEC_BIT_MARK, NEC_HIGH_SPACE)
+                    transmitBit(BIT_MARK, HIGH_SPACE)
                 } else {
-                    transmitBit(NEC_BIT_MARK, NEC_LOW_SPACE)
+                    transmitBit(BIT_MARK, LOW_SPACE)
                 }
                 mask >>= 1
             }
         })
-        transmitBit(NEC_BIT_MARK, 100)
+        transmitBit(BIT_MARK, SPACE)
     }
 }
