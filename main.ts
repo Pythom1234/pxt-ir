@@ -15,6 +15,7 @@ namespace IRTransmitter {
     let strengh = 511
     //% block="connect IR transmitter at pin %pin||signal strengh $signalStrengh"
     //% block.loc.cs="připojit IR vysílač na pin %pin||síla signálu $signalStrengh"
+    //% signalStrengh.defl=511
     //% expandableArgumentMode=true
     export function connectTransmitter(pin: AnalogPin, signalStrengh?: number): void {
         if (signalStrengh) {
