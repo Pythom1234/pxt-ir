@@ -180,8 +180,7 @@ namespace irLegoPowerfunctions {
     }
 
     //% block="connect IR LED at pin %pin"
-    //% weight=90
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4 pin.fieldOptions.tooltips="false"
+    //% weight=100
     export function connectIrLed(pin: AnalogPin) {
         state = {
             irDevice: new InfraredDevice(pin),
@@ -200,7 +199,7 @@ namespace irLegoPowerfunctions {
 
     //% block="set | motor %motor | to %speed"
     //% speed.min=-7 speed.max=7
-    //% weight=80
+    //% weight=99
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
     export function setSpeed(motor: PowerFunctionsMotor, speed: number) {
         speed = Math.max(-7, Math.min(7, speed));
@@ -214,14 +213,14 @@ namespace irLegoPowerfunctions {
     }
 
     //% block="brake| motor %motor"
-    //% weight=75
+    //% weight=98
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
     export function brake(motor: PowerFunctionsMotor) {
         setSpeed(motor, 0);
     }
 
     //% block="float | motor %motor | to stop"
-    //% weight=70
+    //% weight=97
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
     export function float(motor: PowerFunctionsMotor) {
         if (state) {
@@ -230,7 +229,7 @@ namespace irLegoPowerfunctions {
     }
 
     //% block="set direction | of motor %motor | to %direction"
-    //% weight=20
+    //% weight=96
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
     export function setMotorDirection(
         motor: PowerFunctionsMotor,
