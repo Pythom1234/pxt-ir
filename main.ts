@@ -81,7 +81,7 @@ namespace IRTransmitter {
 
 
 
-//% color=#014598 icon="\uf09e" block="LEGO Powerfunctions"
+//% icon="\uf09e" color=#014598  block="LEGO Powerfunctions"
 namespace irLegoPowerfunctions {
     enum PowerFunctionsChannel {
         //% block="1"
