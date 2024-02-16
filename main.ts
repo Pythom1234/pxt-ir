@@ -40,11 +40,11 @@ namespace IRTransmitter {
             return
         }
 
-        const IR_MARK = 9000 - waitCorrection
-        const SPACE = 4500 - waitCorrection
-        const BIT_MARK = 560 - waitCorrection + 50
-        const HIGH_SPACE = 1690 - waitCorrection - 50
-        const LOW_SPACE = 560 - waitCorrection - 50
+        const IR_MARK = 157 - waitCorrection
+        const SPACE = 1026 - waitCorrection
+        const BIT_MARK = IR_MARK//560 - waitCorrection + 50
+        const HIGH_SPACE = 552 - waitCorrection - 50
+        const LOW_SPACE = 263 - waitCorrection - 50
 
         const addressSection = parseInt(hex32bit.substr(0, 6))
         const commandSection = parseInt("0x" + hex32bit.substr(6, 4))
@@ -63,6 +63,7 @@ namespace IRTransmitter {
                 mask >>= 1
             }
         })
+        
         transmitBit(BIT_MARK, 100)
     }
 }
