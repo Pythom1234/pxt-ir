@@ -10,14 +10,14 @@ namespace IRReciever {
 }
 //% icon="\uf09e" color=#014598 block="IR Transmitter" block.loc.cs="IR Vysílač"
 namespace IRTransmitter {
-    let irPin: DigitalPin
+    let irPin: AnalogPin
     let waitCorrection: number
     //% block="connect IR transmitter at pin %pin"
     //% block.loc.cs="připojit IR vysílač na pin %pin"
-    export function connectTransmitter(pin: DigitalPin): void {
+    export function connectTransmitter(pin: AnalogPin): void {
         irPin = pin
-        //pins.analogWritePin(irPin, 0)
-        //pins.analogSetPeriod(irPin, 26)
+        pins.analogWritePin(irPin, 0)
+        pins.analogSetPeriod(irPin, 26)
         const start = input.runningTimeMicros()
         const runs = 32
         for (let i = 0; i < runs; i++) {
@@ -28,12 +28,10 @@ namespace IRTransmitter {
         control.waitMicros(2000)
     }
     function transmitBit(highMicros: number, lowMicros: number): void {
-        //pins.analogWritePin(irPin, 511)
-        pins.digitalWritePin(irPin, 1)
-        control.waitMicros(highMicros)
-        //pins.analogWritePin(irPin, 1)
-        pins.digitalWritePin(irPin, 0)
-        control.waitMicros(lowMicros)
+        pins.analogWritePin(irPin, 511);
+        control.waitMicros(highMicros);
+        pins.analogWritePin(irPin, 1);
+        control.waitMicros(lowMicros);
     }
     //% block="send IR datagram $hex32bit"
     //% block.loc.cs="poslat IR datagram $hex32bit"
