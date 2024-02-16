@@ -28,10 +28,10 @@ namespace IRTransmitter {
         control.waitMicros(2000)
     }
     function transmitBit(highMicros: number, lowMicros: number): void {
-        pins.analogWritePin(irPin, 511);
-        control.waitMicros(highMicros);
-        pins.analogWritePin(irPin, 1);
-        control.waitMicros(lowMicros);
+        pins.analogWritePin(irPin, 511)
+        control.waitMicros(highMicros)
+        pins.analogWritePin(irPin, 1)
+        control.waitMicros(lowMicros)
     }
     //% block="send IR datagram $hex32bit"
     //% block.loc.cs="poslat IR datagram $hex32bit"
