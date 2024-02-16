@@ -110,7 +110,7 @@ namespace irLegoPowerfunctions {
         Blue = 1,
     }
     export enum PowerFunctionsMotor {
-        //% block="red | channel 1"
+        //% block="red | channel 1" color=#ff0000
         //% block.loc.cs="červený, kanál 1"
         Red1 = 0,
         //% block="red | channel 2"
