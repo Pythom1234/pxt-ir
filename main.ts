@@ -33,44 +33,36 @@ namespace IRTransmitter {
         pins.analogWritePin(irPin, 1);
         control.waitMicros(lowMicros);
     }
-    //% block="send IR datagram $msg"
-    //% block.loc.cs="poslat IR datagram $msg"
-    export function sendMessage(msg: string): void {
-        let message = parseInt(msg)
-        const IR_MARK = Math.idiv(6 * 1000000, 38000)
-        const START_STOP_PAUSE = Math.idiv((45 - 6) * 1000000, 38000)
-        const LOW_PAUSE = Math.idiv((16 - 6) * 1000000, 38000)
-        const HIGH_PAUSE = Math.idiv((27 - 6) * 1000000, 38000)
-        const MAX_LENGTH_MS = 16
-        const channel = 1 + ((message >> 12) & 0b0011)
-        const ir_mark = IR_MARK - waitCorrection
-        const high_pause = HIGH_PAUSE - waitCorrection
-        const low_pause = LOW_PAUSE - waitCorrection
-        const start_stop_pause = START_STOP_PAUSE - waitCorrection
-
-        for (let sendCount = 0; sendCount < 5; sendCount++) {
-            const MESSAGE_BITS = 16;
-
-            let mask = 1 << (MESSAGE_BITS - 1);
-
-            transmitBit(ir_mark, start_stop_pause);
-
-            while (mask > 0) {
-                if (message & mask) {
-                    transmitBit(ir_mark, high_pause);
-                } else {
-                    transmitBit(ir_mark, low_pause);
-                }
-                mask >>= 1;
-            }
-
-            transmitBit(ir_mark, start_stop_pause);
-
-            if (sendCount == 0 || sendCount == 1) {
-                basic.pause(5 * MAX_LENGTH_MS);
-            } else {
-                basic.pause((6 + 2 * channel) * MAX_LENGTH_MS);
-            }
+    //% block="send IR datagram $hex32bit"
+    //% block.loc.cs="poslat IR datagram $hex32bit"
+    export function sendNec(hex32bit: string): void {
+        if (hex32bit.length != 10) {
+            return
         }
+
+        const NEC_HDR_MARK = 9000 - waitCorrection
+        const NEC_HDR_SPACE = 4500 - waitCorrection
+        const NEC_BIT_MARK = 560 - waitCorrection + 50
+        const NEC_HIGH_SPACE = 1690 - waitCorrection - 50
+        const NEC_LOW_SPACE = 560 - waitCorrection - 50
+
+        const addressSection = parseInt(hex32bit.substr(0, 6))
+        const commandSection = parseInt("0x" + hex32bit.substr(6, 4))
+        const sections = [addressSection, commandSection]
+
+        transmitBit(NEC_HDR_MARK, NEC_HDR_SPACE)
+
+        sections.forEach((section) => {
+            let mask = 1 << 15;
+            while (mask > 0) {
+                if (section & mask) {
+                    transmitBit(NEC_BIT_MARK, NEC_HIGH_SPACE)
+                } else {
+                    transmitBit(NEC_BIT_MARK, NEC_LOW_SPACE)
+                }
+                mask >>= 1
+            }
+        })
+        transmitBit(NEC_BIT_MARK, 100)
     }
 }
