@@ -95,42 +95,58 @@ namespace irLegoPowerfunctions {
     }
     export enum PowerFunctionsDirection {
         //% block="left"
+        //% block.loc.cs="doleva"
         Left = 1,
         //% block="right"
+        //% block.loc.cs="doprava"
         Right = -1,
     }
     export enum PowerFunctionsOutput {
         //% block="red"
+        //% block.loc.cs="červený"
         Red = 0,
         //% block="blue"
+        //% block.loc.cs="modrý"
         Blue = 1,
     }
     export enum PowerFunctionsMotor {
         //% block="red | channel 1"
+        //% block.loc.cs="červený, kanál 1"
         Red1 = 0,
         //% block="red | channel 2"
+        //% block.loc.cs="červený, kanál 2"
         Red2 = 1,
         //% block="red | channel 3"
+        //% block.loc.cs="červený, kanál 3"
         Red3 = 2,
         //% block="red | channel 4"
+        //% block.loc.cs="červený, kanál 4"
         Red4 = 3,
         //% block="blue | channel 1"
+        //% block.loc.cs="modrý, kanál 1"
         Blue1 = 4,
         //% block="blue | channel 2"
+        //% block.loc.cs="modrý, kanál 2"
         Blue2 = 5,
         //% block="blue | channel 3"
+        //% block.loc.cs="modrý, kanál 3"
         Blue3 = 6,
         //% block="blue | channel 4"
+        //% block.loc.cs="modrý, kanál 4"
         Blue4 = 7,
     }
     export enum PowerFunctionsCommand {
         //% block="float"
+        //% block.loc.cs="pomalu zastavit"
         Float = 0,
         //% block="forward"
+        //% block.loc.cs="dopředu"
         Forward = 1,
         //% block="backward"
+        //% block.loc.cs="dozadu"
         Backward = 2,
         //% block="brake"
+        //% block.loc.cs="zastavit"
         Brake = 3,
     }
     interface PowerFunctionsState {
@@ -180,6 +196,7 @@ namespace irLegoPowerfunctions {
     }
 
     //% block="connect IR LED at pin %pin"
+    //% block.loc.cs="připojit IR vysílač na pin %pin"
     //% weight=100
     export function connectIrLed(pin: AnalogPin) {
         state = {
@@ -197,7 +214,8 @@ namespace irLegoPowerfunctions {
         };
     }
 
-    //% block="set | motor %motor | to %speed"
+    //% block="set motor %motor to %speed"
+    //% block.loc.cs="nastavit motoru %motor rychlost %speed"
     //% speed.min=-7 speed.max=7
     //% weight=99
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
@@ -212,14 +230,16 @@ namespace irLegoPowerfunctions {
         }
     }
 
-    //% block="brake| motor %motor"
+    //% block="brake motor %motor"
+    //% block.loc.cs="zastavit motor %motor"
     //% weight=98
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
     export function brake(motor: PowerFunctionsMotor) {
         setSpeed(motor, 0);
     }
 
-    //% block="float | motor %motor | to stop"
+    //% block="float motor %motor to stop"
+    //% block.loc.cs="pomalu zastavit motor %motor"
     //% weight=97
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
     export function float(motor: PowerFunctionsMotor) {
@@ -228,7 +248,8 @@ namespace irLegoPowerfunctions {
         }
     }
 
-    //% block="set direction | of motor %motor | to %direction"
+    //% block="set direction of motor %motor to %direction"
+    //% block.loc.cs="nastavit směr otáčení motoru %motor na %direction"
     //% weight=96
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
     export function setMotorDirection(
