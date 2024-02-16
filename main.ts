@@ -28,7 +28,7 @@ namespace IRTransmitter {
         control.waitMicros(2000)
     }
     function transmitBit(highMicros: number, lowMicros: number): void {
-        pins.analogWritePin(irPin, 1023)
+        pins.analogWritePin(irPin, 512)
         control.waitMicros(highMicros)
         pins.analogWritePin(irPin, 1)
         control.waitMicros(lowMicros)
