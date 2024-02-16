@@ -33,9 +33,10 @@ namespace IRTransmitter {
         pins.analogWritePin(irPin, 1);
         control.waitMicros(lowMicros);
     }
-    //% block="send IR datagram $hex32bit"
-    //% block.loc.cs="poslat IR datagram $hex32bit"
-    export function sendMessage(message: number): void {
+    //% block="send IR datagram $msg"
+    //% block.loc.cs="poslat IR datagram $msg"
+    export function sendMessage(msg: string): void {
+        let message = parseInt(msg)
         const IR_MARK = Math.idiv(6 * 1000000, 38000)
         const START_STOP_PAUSE = Math.idiv((45 - 6) * 1000000, 38000)
         const LOW_PAUSE = Math.idiv((16 - 6) * 1000000, 38000)
