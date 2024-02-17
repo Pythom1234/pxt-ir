@@ -263,11 +263,11 @@ namespace irLegoPowerfunctions {
 
     //% block="set light intensity %light to %intensity"
     //% block.loc.cs="nastavit intenzitu světla %light na %intensity"
-    //% intensity.min=-7 intensity.max=7
+    //% intensity.min=0 intensity.max=7
     //% weight=95
     //% light.fieldEditor="gridpicker" light.fieldOptions.columns=4 light.fieldOptions.tooltips="false"
     export function setLight(light: PowerFunctionsMotor, intensity: number) {
-        intensity = Math.max(-7, Math.min(7, intensity));
+        intensity = Math.max(0, Math.min(7, intensity));
         if (state) {
             sendSingleOutputCommand(
                 getChannel(light),
