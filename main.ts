@@ -1,6 +1,5 @@
 //% icon="\uf09e" color=#014598 block="IR Reciever" block.loc.cs="IR Přijímač"
 namespace IRReciever {
-
 }
 
 

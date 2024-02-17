@@ -3,7 +3,8 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "background": "github:1010Technologies/pxt-makerbit-background#v1.0.1"
     },
     "files": [
         "main.ts",
