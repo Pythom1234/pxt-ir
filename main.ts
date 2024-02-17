@@ -164,7 +164,7 @@ namespace IRReciever {
             irState.hasNewDatagram = true;
 
             if (irState.onIrDatagram) {
-                background.schedule(irState.onIrDatagram, background.Thread.UserCallback, background.Mode.Once, 0);
+                makerbit.background.schedule(irState.onIrDatagram, makerbit.background.Thread.UserCallback, makerbit.background.Mode.Once, 0);
             }
 
             const newCommand = irState.commandSectionBits >> 8;
@@ -174,13 +174,13 @@ namespace IRReciever {
                 if (irState.activeCommand >= 0) {
                     const releasedHandler = irState.onIrButtonReleased.find(h => h.irButton === irState.activeCommand || IrButton.Any === h.irButton);
                     if (releasedHandler) {
-                        background.schedule(releasedHandler.onEvent, background.Thread.UserCallback, background.Mode.Once, 0);
+                        makerbit.background.schedule(releasedHandler.onEvent, makerbit.background.Thread.UserCallback, makerbit.background.Mode.Once, 0);
                     }
                 }
 
                 const pressedHandler = irState.onIrButtonPressed.find(h => h.irButton === newCommand || IrButton.Any === h.irButton);
                 if (pressedHandler) {
-                    background.schedule(pressedHandler.onEvent, background.Thread.UserCallback, background.Mode.Once, 0);
+                    makerbit.background.schedule(pressedHandler.onEvent, makerbit.background.Thread.UserCallback, makerbit.background.Mode.Once, 0);
                 }
 
                 irState.activeCommand = newCommand;
@@ -225,7 +225,7 @@ namespace IRReciever {
 
         enableIrMarkSpaceDetection(pin);
 
-        background.schedule(notifyIrEvents, background.Thread.Priority, background.Mode.Repeat, REPEAT_TIMEOUT_MS);
+        makerbit.background.schedule(notifyIrEvents, makerbit.background.Thread.Priority, makerbit.background.Mode.Repeat, REPEAT_TIMEOUT_MS);
     }
 
     function notifyIrEvents() {
@@ -236,7 +236,7 @@ namespace IRReciever {
 
                 const handler = irState.onIrButtonReleased.find(h => h.irButton === irState.activeCommand || IrButton.Any === h.irButton);
                 if (handler) {
-                    background.schedule(handler.onEvent, background.Thread.UserCallback, background.Mode.Once, 0);
+                    makerbit.background.schedule(handler.onEvent, makerbit.background.Thread.UserCallback, makerbit.background.Mode.Once, 0);
                 }
 
                 irState.bitsReceived = 0;
