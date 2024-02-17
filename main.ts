@@ -209,19 +209,16 @@ namespace IRReciever {
         };
     }
 
-    //% block="connect IR receiver at pin %pin and decode %protocol"
+    //% block="connect IR receiver at pin %pin"
     //% weight=100
-    export function connectIrReceiver(
-        pin: DigitalPin,
-        protocol: IrProtocol
-    ): void {
+    export function connectIrReceiver(pin: DigitalPin,): void {
         initIrState();
 
         if (irState.protocol) {
             return;
         }
 
-        irState.protocol = protocol;
+        irState.protocol = IrProtocol.NEC;
 
         enableIrMarkSpaceDetection(pin);
 
