@@ -210,6 +210,7 @@ namespace IRReciever {
     }
 
     //% block="connect IR receiver at pin %pin"
+    //% block.loc.cs="připojit IR přijímač na pin %pin"
     //% weight=100
     export function connectIrReceiver(pin: DigitalPin): void {
         initIrState();
@@ -265,6 +266,7 @@ namespace IRReciever {
     }
 
     //% block="on IR datagram received"
+    //% block.loc.cs="při přijetí IR datagramu"
     //% weight=99
     export function onIrDatagram(handler: () => void) {
         initIrState();
@@ -272,6 +274,7 @@ namespace IRReciever {
     }
 
     //% block="IR datagram"
+    //% block.loc.cs="IR datagram"
     //% weight=98
     export function irDatagram(): string {
         basic.pause(0);

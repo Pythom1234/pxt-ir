@@ -1,5 +1,5 @@
 {
-    "name": "pxt-ir",
+    "name": "IR",
     "description": "",
     "dependencies": {
         "core": "*",
