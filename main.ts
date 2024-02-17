@@ -211,7 +211,7 @@ namespace IRReciever {
 
     //% block="connect IR receiver at pin %pin"
     //% weight=100
-    export function connectIrReceiver(pin: DigitalPin,): void {
+    export function connectIrReceiver(pin: DigitalPin): void {
         initIrState();
 
         if (irState.protocol) {
