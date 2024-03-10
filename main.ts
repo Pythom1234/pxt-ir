@@ -528,9 +528,9 @@ namespace IRLegoPowerfunctions {
 
     //% block="set channel %channel value %value"
     //% block.loc.cs="nastavit kanálu %channel hodnotu %value"
-    //% speed.min=-7 speed.max=7
+    //% value.min=-7 value.max=7
     //% weight=99
-    //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
+    //% channel.fieldEditor="gridpicker" channel.fieldOptions.columns=4 channel.fieldOptions.tooltips="false"
     export function setSpeed(channel: PowerFunctionsMotor, value: number) {
         value = Math.max(-7, Math.min(7, value));
         if (state) {
