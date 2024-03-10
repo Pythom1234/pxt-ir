@@ -526,18 +526,18 @@ namespace IRLegoPowerfunctions {
         };
     }
 
-    //% block="set motor %motor to %speed"
-    //% block.loc.cs="nastavit motoru %motor rychlost %speed"
+    //% block="set channel %channel value %value"
+    //% block.loc.cs="nastavit kanálu %channel hodnotu %value"
     //% speed.min=-7 speed.max=7
     //% weight=99
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
-    export function setSpeed(motor: PowerFunctionsMotor, speed: number) {
-        speed = Math.max(-7, Math.min(7, speed));
+    export function setSpeed(channel: PowerFunctionsMotor, value: number) {
+        value = Math.max(-7, Math.min(7, value));
         if (state) {
             sendSingleOutputCommand(
-                getChannel(motor),
-                getOutput(motor),
-                speed * state.motorDirections[motor]
+                getChannel(channel),
+                getOutput(channel),
+                value * state.motorDirections[channel]
             );
         }
     }
@@ -557,19 +557,6 @@ namespace IRLegoPowerfunctions {
     export function float(motor: PowerFunctionsMotor) {
         if (state) {
             sendSingleOutputCommand(getChannel(motor), getOutput(motor), 8);
-        }
-    }
-
-    //% block="set channel %channel value %value"
-    //% block.loc.cs="nastavit do kanálu %channel hodnotu %value"
-    //% weight=96
-    //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=4 motor.fieldOptions.tooltips="false"
-    export function setMotorDirection(
-        channel: PowerFunctionsMotor,
-        value: PowerFunctionsDirection
-    ) {
-        if (state) {
-            state.motorDirections[channel] = value;
         }
     }
 
